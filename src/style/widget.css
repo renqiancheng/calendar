@@ -87,7 +87,7 @@ a {
 }
 .mod-calendar .selector {
     display: flex;
-    gap: calc(var(--base-size-mobile) * 8);
+    gap: calc(var(--base-size) * 8);
     justify-content: center;
     position: relative;
     padding: calc(var(--base-size) * 5) calc(var(--base-size) * 5) 0;
