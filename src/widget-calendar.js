@@ -57,9 +57,9 @@ class WidgetCalendar extends HTMLElement {
         // 节点
         _.$module = _.shadowRoot.querySelector('.mod-calendar');
         _.$tbody = _.$module.querySelector('tbody');
-        _.$year = _.$module.querySelector('.year');
-        _.$month = _.$module.querySelector('.month');
-        _.$holiday = _.$module.querySelector('.holiday');
+        _.$year = _.$module.querySelector('select[name="year"]');
+        _.$month = _.$module.querySelector('select[name="month"]');
+        _.$holiday = _.$module.querySelector('select[name="holiday"]');
         _.$goback = _.$module.querySelector('.goback');
         _.$prev_year = _.$module.querySelector('.prev-year');
         _.$next_year = _.$module.querySelector('.next-year');
@@ -148,7 +148,7 @@ class WidgetCalendar extends HTMLElement {
                 <div class="selector">
                     <span>
                         <a class="prev prev-year" href="javascript:;">&lt;</a>
-                        <select class="year">
+                        <select name="year">
                             ${(function(){
                                 let list = [];
                                 for(let i=minYear;i<=maxYear;i++){
@@ -161,7 +161,7 @@ class WidgetCalendar extends HTMLElement {
                     </span>
                     <span>
                         <a class="prev prev-month" href="javascript:;">&lt;</a>
-                        <select class="month">
+                        <select name="month">
                             ${(function(){
                                 let list = [];
                                 for(let i=1;i<=12;i++){
@@ -173,7 +173,7 @@ class WidgetCalendar extends HTMLElement {
                         <a class="next next-month" href="javascript:;">&gt;</a>
                     </span>
                     <span>
-                        <select class="holiday">
+                        <select name="holiday">
                             <option value="">假日安排</option>
                         </select>
                     </span>
