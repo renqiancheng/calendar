@@ -1,5 +1,5 @@
 import {getDateString} from './tool.js';
-import {getTimestampBySolar} from './solar.js';
+import {getTimestampBySolar, getSolarDayOffset} from './solar.js';
 import {getLunarByTimestamp} from './lunar.js';
 import {getTermDate} from './term.js';
 
@@ -47,7 +47,7 @@ export function getGanZhiMonth(sYear,sMonth,sDay){
 
 // 获取干支日
 export function getGanZhiDay(sYear,sMonth,sDay){
-    let offset = Math.round((getTimestampBySolar(sYear, sMonth, sDay) -getTimestampBySolar(1900, 1, 30))/86400000);
+    let offset = getSolarDayOffset(sYear, sMonth, sDay);
     let gzIndex = offset+39;
     return getGanZhiByIndex(gzIndex);
 }

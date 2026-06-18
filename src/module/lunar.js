@@ -1,9 +1,8 @@
 import {
     minYear,
-    minMonth,
-    minDay,
     maxYear
 } from './config/base.js';
+import {getTimestampBySolar, getSolarDayOffset, getSolarDateByDayOffset} from './solar.js';
 // 闰月数据压缩：1位闰月大小+12位平月大小及4位长度闰月月份转2进制，再转32进制
 const monthData = [
     'iuo','in0','19bg','l6l','1kj0','1mag','2pak','ll0','16mg','lei',
@@ -32,9 +31,6 @@ const monthData = [
 const monthMap = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
 // 十位
 const dayMap = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
-// 参考时间点（与公历一致，使用本地时区）
-const startTime = new Date(minYear, minMonth - 1, minDay, 0, 0, 0, 0).getTime();
-
 // 获取农历年闰月
 export function getLeapMonth(lYear){
     let data =  parseInt(monthData[lYear - minYear],32);
@@ -95,12 +91,14 @@ export function getTimestampByLunar(lYear,lMonth,lDay,isLeap){
         offset += data&1<<16?30:29;
     }
     offset += lDay;
-    return startTime+offset*86400000;
+    const solar = getSolarDateByDayOffset(offset);
+    return getTimestampBySolar(solar.sYear, solar.sMonth, solar.sDay);
 }
 
 // 时间戳转农历日期
 export function getLunarByTimestamp(timestamp){
-    let offset = Math.floor((timestamp - startTime)/86400000);
+    const now = new Date(timestamp);
+    let offset = getSolarDayOffset(now.getFullYear(), now.getMonth() + 1, now.getDate());
     let lYear = 0, lMonth = 0, lDay = 0, isLeap = false;
     let days;
     if(offset<=0){

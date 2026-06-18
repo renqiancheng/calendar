@@ -1,6 +1,6 @@
 {
     "name": "@rqiancheng/calendar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Chinese lunar calendar",
     "author": "HaoLe Zheng",
     "license": "MIT",
@@ -12,7 +12,7 @@
     "main": "./dist/calendar.min.js",
     "module": "./dist/calendar.min.mjs",
     "exports": {
-        ".":{
+        ".": {
             "default": "./dist/calendar.min.js",
             "import": "./dist/calendar.min.mjs"
         },
