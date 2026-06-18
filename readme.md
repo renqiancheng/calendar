@@ -16,18 +16,18 @@
 ## 安装
 
 ```bash
-npm install calendar-tool
+npm install @rqiancheng/calendar
 ```
-
-若发布为独立 NPM 包，请使用 scoped 包名（例如 `@your-scope/calendar`），避免与原版 `calendar-tool` 冲突。
 
 ```js
 // ESM
-import calendar from 'calendar-tool';
-// 或 import calendar from '@your-scope/calendar';
+import calendar from '@rqiancheng/calendar';
+
+// CommonJS / Node
+const calendar = require('@rqiancheng/calendar');
 
 // 万年历 Web Component
-import 'calendar-tool/widget-calendar';
+import '@rqiancheng/calendar/widget-calendar';
 ```
 
 发布前请执行 `npm run build`，NPM 仅包含 `dist/` 目录下的构建产物。

@@ -1,12 +1,12 @@
 /*!
- * calendar-tool v1.0.3
+ * @rqiancheng/calendar v1.0.0
  * Chinese lunar calendar
- * https://passer-by.com/calendar/
+ * https://github.com/renqiancheng/calendar
  *
  * Copyright (c) 2022-present, HaoLe Zheng
  *
  * Released under the MIT License
- * https://github.com/mumuy/calendar
+ * https://github.com/renqiancheng/calendar
  *
  * Created on: 2026-06-17
  */
