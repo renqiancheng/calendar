@@ -15,6 +15,7 @@ export default {
         return getDateInfo(timestamp);
     },
     getToday:function(){
-        return getDateInfo(Date.now());
+        const now = new Date();
+        return this.getDateBySolar(now.getFullYear(), now.getMonth() + 1, now.getDate());
     }
 };

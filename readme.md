@@ -1,8 +1,57 @@
 # 中国农历公历换算算法
 
+本项目基于 [mumuy/calendar](https://github.com/mumuy/calendar) 修改维护。
+
 ## 参考标准
 
 算法根据《中华人民共和国国家标准GB/T33661—2017〈农历的编算和颁行〉》标准开发，明确了干支纪年和生肖纪年起于正月初一0点，与农历新年同步。
+
+## 与原版差异
+
+相对原版，本仓库主要改动如下：
+
+- **时区修复**：公历时间戳统一使用本地时区午夜（`getTimestampBySolar` / `getLunarByTimestamp` 基准点），`getToday()` 与 `getDateBySolar()` 走同一套逻辑，避免在西时区等环境下「今天」与日历格子日期不一致。
+- **演示页**：移除自动跳转官网及 `stat.js` 中的域名重定向，便于本地调试。
+
+## 安装
+
+```bash
+npm install calendar-tool
+```
+
+若发布为独立 NPM 包，请使用 scoped 包名（例如 `@your-scope/calendar`），避免与原版 `calendar-tool` 冲突。
+
+```js
+// ESM
+import calendar from 'calendar-tool';
+// 或 import calendar from '@your-scope/calendar';
+
+// 万年历 Web Component
+import 'calendar-tool/widget-calendar';
+```
+
+发布前请执行 `npm run build`，NPM 仅包含 `dist/` 目录下的构建产物。
+
+## 时区说明
+
+- **浏览器端**：`getToday()`、`getDateBySolar()`、`widget-calendar` 均按用户**本地时区**解析日期，一般可正常使用。
+- **Node / 服务端**：`getToday()` 取的是**服务器系统时区**的「今天」。容器默认 UTC 时，可能与国内用户看到的日期不同；服务端应传入客户端日期，或自行按业务时区（如 `Asia/Shanghai`）处理。
+
+```js
+// 服务端推荐：使用客户端传来的年月日，而非 getToday()
+calendar.getDateBySolar(clientYear, clientMonth, clientDay);
+```
+
+## 法定节假日数据
+
+节日名称（春节、端午、清明等）由农历、节气等算法计算；日历上的 **「休 / 班」** 标记来自 `src/module/config/holiday.js` 中的 `scheduleMap`，为**静态配置**，需按国务院每年发布的放假安排手动维护。
+
+- 配置位置：`src/module/config/holiday.js` → `scheduleMap`
+- 数据含义：`'MM-DD': 1` 表示放假（休），`'MM-DD': 0` 表示调休补班（班）
+- 当前覆盖：2011～2026 年；新年份需待国务院办公厅通知发布后追加
+- 官方来源：[中国政府网 · 节假日安排](https://www.gov.cn/zhengce/)（搜索「国办发明电」或「节假日安排」）
+
+修改 `holiday.js` 后需重新执行 `npm run build`。
 
 ## 网页组件
 ```html

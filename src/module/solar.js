@@ -3,9 +3,9 @@ import {getDateString} from './tool.js';
 // 星期
 const weekMap = ['日','一','二','三','四','五','六'];
 
-// 公历日期转时间戳
+// 公历日期转时间戳（使用本地时区午夜，与 getSolarByTimestamp 一致）
 export function getTimestampBySolar(sYear,sMonth,sDay){
-    return Date.UTC(sYear, sMonth-1, sDay, 0, 0, 0);
+    return new Date(sYear, sMonth - 1, sDay, 0, 0, 0, 0).getTime();
 }
 
 // 通过时间戳获取日期
