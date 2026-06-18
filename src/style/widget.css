@@ -1,9 +1,11 @@
 :host {
-    display: inline-block;
+    display: block;
     width: var(--calendar-width, 100%);
     min-width: var(--calendar-min-width, 360px);
     max-width: var(--calendar-max-width, 600px);
-    vertical-align: bottom;
+    overflow: hidden;
+    border-radius: inherit;
+    background: var(--primary-color);
     white-space: initial;
     font-family: Arial, Helvetica, "Microsoft Yahei";
     color: #1f2328;
@@ -32,9 +34,9 @@ a {
     display: flex;
     gap: calc(var(--base-size) * 4);
     flex-direction: row-reverse;
-    padding: calc(var(--base-size) * 4);
+    padding: var(--calendar-padding, calc(var(--base-size) * 4));
     background: var(--primary-color);
-    border-radius: calc(var(--base-size) * 6);
+    border-radius: var(--calendar-inner-radius, calc(var(--base-size) * 6));
     font-size: calc(var(--base-size) * 14);
 }
 .mod-calendar .info {
@@ -326,7 +328,7 @@ a {
 @container (max-width: 480px) {
     .mod-calendar {
         flex-direction: column;
-        padding: calc(var(--base-size) * 3);
+        padding: var(--calendar-padding, calc(var(--base-size) * 3));
         font-size: calc(var(--base-size-mobile) * 12);
     }
     .mod-calendar .info {
