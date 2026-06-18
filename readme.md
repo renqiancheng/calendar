@@ -66,6 +66,28 @@ calendar.getDateBySolar(clientYear, clientMonth, clientDay);
 </widget-calendar>
 ```
 
+#### 尺寸与 CSS 变量
+
+容器宽度 ≤480px 为上下栏布局，>480px 为左右栏布局。Popover 等窄容器建议宽度 360–440px。
+
+以下变量可在 `<widget-calendar>` 元素上设置，会穿透 Shadow DOM：
+
+| 变量 | 默认值 | 作用 |
+|------|--------|------|
+| `--calendar-width` | `100%` | 组件宽度 |
+| `--calendar-min-width` | `360px` | 最小宽度 |
+| `--calendar-max-width` | `600px` | 最大宽度 |
+| `--calendar-design-width` | `600` | 桌面缩放基准（cqw 除数） |
+| `--calendar-mobile-design-width` | `480` | 窄屏缩放基准 |
+
+```html
+<!-- Popover 场景：400px 宽，保持上下栏布局 -->
+<widget-calendar
+  date="2026-6-18"
+  style="display:block; width:400px; --calendar-min-width:400px;"
+></widget-calendar>
+```
+
 #### 自定义事件-选中日期: onSelect
 
 ```js
