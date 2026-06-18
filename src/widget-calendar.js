@@ -185,13 +185,13 @@ class WidgetCalendar extends HTMLElement {
                     <table>
                         <thead>
                             <tr>
-                                <th><span>日</span></th>
                                 <th><span>一</span></th>
                                 <th><span>二</span></th>
                                 <th><span>三</span></th>
                                 <th><span>四</span></th>
                                 <th><span>五</span></th>
                                 <th><span>六</span></th>
+                                <th><span>日</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -212,8 +212,10 @@ class WidgetCalendar extends HTMLElement {
         let firstDay = calendar.getDateBySolar(thatDay['sYear'],thatDay['sMonth'],1);
         let monthDays = getSolarMonthDays(thatDay['sYear'],thatDay['sMonth']);
         _.currentMonthData = [];
+        // 周一为首列时的列偏移（0=周一 … 6=周日）
+        const getWeekColumn = (week) => (week + 6) % 7;
         // 上月日期
-        for(let i=firstDay['week'];i>0;i--){
+        for(let i=getWeekColumn(firstDay['week']);i>0;i--){
             let obj = calendar.getDateBySolar(firstDay['sYear'],firstDay['sMonth'],firstDay['sDay']-i);
             _.currentMonthData.push(obj);
         }
@@ -224,7 +226,7 @@ class WidgetCalendar extends HTMLElement {
         }
         // 下月日期
         let lastDay = _.currentMonthData[_.currentMonthData.length-1];
-        for(let i=1;lastDay['week']+i<7;i++){
+        for(let i=1;getWeekColumn(lastDay['week'])+i<7;i++){
             let obj = calendar.getDateBySolar(lastDay['sYear'],lastDay['sMonth'],lastDay['sDay']+i);
             _.currentMonthData.push(obj);
         }
@@ -264,6 +266,13 @@ class WidgetCalendar extends HTMLElement {
                     sign = holiday[dateStr]?'holiday':'work';
                     classnameList.push(sign);
                 }
+            }
+            const isWeekend = item['week'] === 0 || item['week'] === 6;
+            if(isWeekend && sign !== 'work'){
+                classnameList.push('weekend-rest');
+            }
+            if(isWeekend && sign === 'work'){
+                classnameList.push('weekend-work');
             }
             const lunar_festival = item['festival'].split(' ').find(function(value){
                 if(value.length<=3){
