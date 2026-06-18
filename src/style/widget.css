@@ -1,7 +1,7 @@
 :host {
     display: block;
     width: var(--calendar-width, 100%);
-    min-width: var(--calendar-min-width, 360px);
+    min-width: var(--calendar-min-width, 0);
     max-width: var(--calendar-max-width, 600px);
     overflow: hidden;
     border-radius: inherit;
@@ -18,8 +18,8 @@
 }
 @supports (width: 100cqw) {
     :host {
-        --base-size: clamp(1px, calc(100cqw / var(--calendar-design-width, 600)), 1.1px);
-        --base-size-mobile: clamp(1px, calc(100cqw / var(--calendar-mobile-design-width, 480)), 1.1px);
+        --base-size: min(1.1px, calc(100cqw / var(--calendar-design-width, 600)));
+        --base-size-mobile: min(1.1px, calc(100cqw / var(--calendar-mobile-design-width, 480)));
     }
 }
 * {
@@ -400,6 +400,15 @@ a {
     }
     .mod-calendar .table{
         padding: calc(var(--base-size-mobile) * 3);
+    }
+    .mod-calendar table th {
+        line-height: calc(var(--base-size-mobile) * 30);
+    }
+    .mod-calendar table td {
+        border-width: calc(var(--base-size-mobile) * 1);
+    }
+    .mod-calendar table thead tr {
+        border-bottom-width: calc(var(--base-size-mobile) * 3);
     }
     .mod-calendar table tbody a {
         width: auto;

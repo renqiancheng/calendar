@@ -68,14 +68,14 @@ calendar.getDateBySolar(clientYear, clientMonth, clientDay);
 
 #### 尺寸与 CSS 变量
 
-容器宽度 ≤480px 为上下栏布局，>480px 为左右栏布局。Popover 等窄容器建议宽度 360–440px。
+容器宽度 ≤480px 为上下栏布局，>480px 为左右栏布局。尺寸随容器等比缩放；极窄容器（如 Popover ~288px）会自动缩小，避免周日列被裁切。Popover 等场景也可固定宽度 360–440px。
 
 以下变量可在 `<widget-calendar>` 元素上设置，会穿透 Shadow DOM：
 
 | 变量 | 默认值 | 作用 |
 |------|--------|------|
 | `--calendar-width` | `100%` | 组件宽度 |
-| `--calendar-min-width` | `360px` | 最小宽度 |
+| `--calendar-min-width` | `0` | 最小宽度；需固定最小展示宽度时可自行设为 `360px` 等 |
 | `--calendar-max-width` | `600px` | 最大宽度 |
 | `--calendar-design-width` | `600` | 桌面缩放基准（cqw 除数） |
 | `--calendar-mobile-design-width` | `480` | 窄屏缩放基准 |

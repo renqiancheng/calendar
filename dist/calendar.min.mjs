@@ -1,5 +1,5 @@
 /*!
- * @rqiancheng/calendar v1.0.4
+ * @rqiancheng/calendar v1.0.5
  * Chinese lunar calendar
  * https://github.com/renqiancheng/calendar
  *
